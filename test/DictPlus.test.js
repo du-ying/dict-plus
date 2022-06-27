@@ -111,4 +111,36 @@ test('DictPlus.getValueByIndex 方法测试', function () {
     .toEqual({ label: '3', value: 3, alias: 'label-3' })
 })
 
-test('DictPlus.getValueByKey 方法测试', function () {})
+test('DictPlus.getValueByKey 方法测试', function () {
+  expect(DictPlus.getValueByKey('OrderStatus', 'code2'))
+    .toEqual({})
+
+  expect(DictPlus.getValueByKey('OrderStatusEnum', 'code4'))
+    .toEqual({})
+
+  expect(DictPlus.getValueByKey('OrderStatusEnum', 'code2'))
+    .toEqual({ label: '2', value: 2, alias: 'label-2' })
+
+  expect(DictPlus.getValueByKey('OrderStatusEnum', 'code2', { fields: 'label, alias, other' }))
+    .toEqual({ label: '2', alias: 'label-2' })
+
+  expect(DictPlus.getValueByKey('OrderStatusEnum', 'code2', { fields: 'label, alias, other', targetField: 'alias' }))
+    .toBe('label-2')
+
+  expect(DictPlus.getValueByKey('OrderStatusEnum', 'code2', { fields: 'label, alias, other', targetField: 'other' }))
+    .toBeUndefined()
+})
+
+test('getValueBySearch 方法测试', function () {
+  expect(DictPlus.getValueBySearch('OrderStatus', 'value', 2, 'alias'))
+    .toBeUndefined()
+
+  expect(DictPlus.getValueBySearch('OrderStatusEnum', 'value', 2, 'alias'))
+    .toBe('label-2')
+
+  expect(DictPlus.getValueBySearch('OrderStatusEnum', 'value', 2, 'other'))
+    .toBeUndefined()
+
+  expect(DictPlus.getValueBySearch('OrderStatusEnum', 'value', 4, 'alias'))
+    .toBeUndefined()
+})
