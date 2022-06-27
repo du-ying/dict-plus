@@ -1,0 +1,30 @@
+{
+  "name": "@duying/dict-plus",
+  "version": "1.0.0",
+  "description": "字典工具",
+  "main": "src/DictPlus.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/du-ying/dict-plus.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/du-ying/dict-plus/issues"
+  },
+  "homepage": "https://github.com/du-ying/dict-plus#readme",
+  "files": [
+    "src"
+  ],
+  "dependencies": {
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.18.2",
+    "jest": "^28.1.1"
+  }
+}
