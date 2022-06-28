@@ -1,6 +1,6 @@
 {
   "name": "@duying/dict-plus",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "字典工具",
   "main": "src/DictPlus.js",
   "scripts": {
@@ -10,7 +10,12 @@
     "type": "git",
     "url": "git+https://github.com/du-ying/dict-plus.git"
   },
-  "keywords": [],
+  "keywords": [
+    "dict",
+    "dictionary",
+    "map",
+    "object"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {
