@@ -39,14 +39,15 @@ export default class DictPlus {
 
   static getValueByKey (dictName, mapKey, { targetField } = {}) {
     const values = this.getValues(dictName, { mapKeys: _.replace(mapKey, /\s?,\s?/, '') })
-    const result = values.length > 0 ? values[0] : {}
-    return _.isString(targetField) && _.isObjectLike(result) ? result[targetField] : result
+    if (values.length === 0) return undefined
+    const result = values[0]
+    return _.isString(targetField) && targetField !== '' && _.isObjectLike(result) ? result[targetField] : result
   }
 
   static getValueBySearch (dictName, searchField, searchValue, targetField) {
     const values = this.getValues(dictName)
     const data = _.find(values, [searchField, searchValue])
     if (_.isUndefined(data)) return undefined
-    return _.isString(targetField) && _.isObjectLike(data) ? data[targetField] : data
+    return _.isString(targetField) && targetField !== '' && _.isObjectLike(data) ? data[targetField] : data
   }
 }

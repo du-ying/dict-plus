@@ -40,6 +40,14 @@ DictPlus.getValueByIndex('OrderStatusEnum', 0) // => { label: '1', value: 1, ali
 DictPlus.getValueByIndex('OrderStatusEnum', 3) // => 同上
 DictPlus.getValueByIndex('OrderStatusEnum', 1, { targetField: 'value' }) // => 2
 DictPlus.getValueByIndex('OrderStatusEnum', -2) // => { label: '3', value: 3, alias: 'label-3' }
+
+DictPlus.getValueByKey('OrderStatus', 'code2') // => 字典不存在，返回 undefined
+DictPlus.getValueByKey('OrderStatusEnum', 'code4') // => {}
+DictPlus.getValueByKey('OrderStatusEnum', 'code2') // => { label: '2', value: 2, alias: 'label-2' }
+DictPlus.getValueByKey('OrderStatusEnum', 'code2', { targetField: 'alias' }) // => 'label-2'
+
+DictPlus.getValueBySearch('OrderStatus', 'value', 2, 'alias') // => 字典不存在，返回 undefined
+DictPlus.getValueBySearch('OrderStatusEnum', 'value', 2, 'alias') // => 'label-2'
 ```
 
 ## DictPlus 类静态方法
