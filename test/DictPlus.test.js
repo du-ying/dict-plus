@@ -23,6 +23,12 @@ test('DictPlus.getValues 方法测试', function () {
     { label: '3', value: 3, alias: 'label-3' }
   ])
 
+  expect(DictPlus.getValues('OrderStatusEnum'))
+    .toEqual(DictPlus.getValues('OrderStatusEnum', { mapKeys: 'code1, code2, code3' }))
+
+  expect(DictPlus.getValues('OrderStatusEnum'))
+    .toEqual(DictPlus.getValues('OrderStatusEnum', { fields: 'label, value, alias' }))
+
   expect(DictPlus.getValues('abc.OrderStatusEnum')).toEqual([
     { label: 'abc1', value: 4 },
     { label: 'abc2', value: 5 },
@@ -72,10 +78,10 @@ test('DictPlus.getValues 方法测试', function () {
   expect(DictPlus.getValues('OrderStatusEnum', { mapKeys: 'code2', fields: 'value' }))
     .toEqual([{ value: 2 }])
 
-  expect(DictPlus.getValues('OrderStatusEnum', { mapKeys: 'code2, code3', fields: 'value, alias' }))
+  expect(DictPlus.getValues('OrderStatusEnum', { mapKeys: 'code2, code3', fields: 'label, value' }))
     .toEqual([
-      { value: 2, alias: 'label-2' },
-      { value: 3, alias: 'label-3' }
+      { value: 2, label: '2' },
+      { value: 3, label: '3' }
     ])
 
   expect(DictPlus.getValues('OrderStatusEnum', { mapKeys: 'code2, code3', fields: 'value, alias' }))
@@ -86,26 +92,17 @@ test('DictPlus.getValueByIndex 方法测试', function () {
   expect(DictPlus.getValueByIndex('OrderStatus', 0))
     .toBeUndefined()
 
-  expect(DictPlus.getValueByIndex('OrderStatus', 0, { fields: 'value, other', targetField: 'a' }))
+  expect(DictPlus.getValueByIndex('OrderStatus', 0, { targetField: 'a' }))
     .toBeUndefined()
 
   expect(DictPlus.getValueByIndex('OrderStatusEnum', 0))
     .toEqual({ label: '1', value: 1, alias: 'label-1' })
-
-  expect(DictPlus.getValueByIndex('OrderStatusEnum', 0, { fields: 'value, alias, other' }))
-    .toEqual({ value: 1, alias: 'label-1' })
 
   expect(DictPlus.getValueByIndex('OrderStatusEnum', 3))
     .toEqual(DictPlus.getValueByIndex('OrderStatusEnum', 0))
 
   expect(DictPlus.getValueByIndex('OrderStatusEnum', 1, { targetField: 'value' }))
     .toBe(2)
-
-  expect(DictPlus.getValueByIndex('OrderStatusEnum', 0, { fields: 'value', targetField: 'other' }))
-    .toBeUndefined()
-
-  expect(DictPlus.getValueByIndex('OrderStatusEnum', 0, { fields: 'value', targetField: 'alias' }))
-    .toBeUndefined()
 
   expect(DictPlus.getValueByIndex('OrderStatusEnum', -2))
     .toEqual({ label: '3', value: 3, alias: 'label-3' })

@@ -29,16 +29,16 @@ export default class DictPlus {
     }
   }
 
-  static getValueByIndex (dictName, index, { fields = [], targetField } = {}) {
-    const values = this.getValues(dictName, { fields })
+  static getValueByIndex (dictName, index, { targetField } = {}) {
+    const values = this.getValues(dictName)
     index = Math.abs(_.toSafeInteger(index))
     const result = values[index % values.length]
     if (_.isUndefined(result)) return undefined
-    return _.isString(targetField) && _.isObjectLike(result) ? result[targetField] : result
+    return _.isString(targetField) && targetField !== '' && _.isObjectLike(result) ? result[targetField] : result
   }
 
-  static getValueByKey (dictName, mapKey, { fields = [], targetField } = {}) {
-    const values = this.getValues(dictName, { mapKeys: mapKey, fields })
+  static getValueByKey (dictName, mapKey, { targetField } = {}) {
+    const values = this.getValues(dictName, { mapKeys: _.replace(mapKey, /\s?,\s?/, '') })
     const result = values.length > 0 ? values[0] : {}
     return _.isString(targetField) && _.isObjectLike(result) ? result[targetField] : result
   }
