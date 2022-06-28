@@ -2,3 +2,5 @@
 *.md
 node_modules/
 package-lock.json
+babel.config.json
+test/
